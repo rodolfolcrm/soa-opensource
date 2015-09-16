@@ -10,7 +10,7 @@ package br.com.rodolfomartins.integrador;
  * 
  * @author 15/09/2015: Rodolfo Martins <DD>
  */
-public class IntegradorException extends Exception
+public class IntegradorException extends RuntimeException
 {
 
    private static final long serialVersionUID = 4707361778069912600L;

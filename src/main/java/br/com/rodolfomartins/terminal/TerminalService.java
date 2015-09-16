@@ -1,10 +1,14 @@
 
 package br.com.rodolfomartins.terminal;
 
+import java.util.HashMap;
 import java.util.List;
-import org.apache.axiom.om.OMElement;
+import java.util.Map;
 import org.apache.log4j.Logger;
+import br.com.rodolfomartins.conversor.Conversor;
 import br.com.rodolfomartins.integrador.IntegradorWebService;
+import br.com.rodolfomartins.integrador.IntegradorWebServiceFactory;
+import br.com.rodolfomartins.util.OMElementHelper;
 
 /**
  * Descrição do Fonte
@@ -18,36 +22,59 @@ public class TerminalService
 
    private static final String ENDPOINT = "http://localhost:9763/services/ImovelDataService?wsdl";
    private static final String NAMESPACE = "ImovelDataService";
-   private static final String NOMEMETODO_FINDALLTERMINAL = "findAllTerminal";
+   private static final String NOMEMETODO_FINDALL_TERMINAL = "findAllTerminal";
+   private static final String NOMEMETODO_FIND_BY_NAME = "findByName";
+   private static final String NOMEMETODO_SALVA = "salva";
 
-   private ConversorTerminal conversorTerminal = new ConversorTerminal();
+   private Conversor<Terminal> conversor = new ConversorTerminal();
 
-   public Terminal[] findAll()
+   public List<Terminal> findAll()
    {
-      try
-      {
-         IntegradorWebService integrador = new IntegradorWebService(ENDPOINT, NAMESPACE, NOMEMETODO_FINDALLTERMINAL);
+      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FINDALL_TERMINAL, conversor);
+      return conversor.converteLista(integrador.envia());
+   }
 
-         OMElement result = integrador.envia();
+   public List<Terminal> findByName(String nome)
+   {
+      Map<String, String> map = new HashMap<String, String>();
+      map.put("nome", nome);
+      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FIND_BY_NAME, conversor);
+      return conversor.converteLista(integrador.envia(map));
+   }
 
-         List<Terminal> terminais = conversorTerminal.converte(integrador.getNamespaceURI(), result);
+   public void salva(Terminal terminal)
+   {
+      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_SALVA, null);
+      integrador.envia(OMElementHelper.toOM(terminal));
+   }
 
-         return terminais.toArray(new Terminal[terminais.size()]);
-      }
-      catch (Exception ex)
-      {
-         LOGGER.error(ex.getMessage(), ex);
-         throw new RuntimeException(ex.getMessage());
-      }
+   public void salvaCanal(Canal canal)
+   {
+      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, "addCanal", null);
+      integrador.envia(OMElementHelper.toOM(canal));
    }
 
    public static void main(String[] args)
    {
-      Terminal[] list = new TerminalService().findAll();
+      Terminal ter = new Terminal();
+      // ter.setPtacod(123);
+      // ter.setTercod("123465");
+      // ter.setTeride("ide ter");
+      // ter.setTernom("nom ter");
+      // new TerminalService().salva(ter);
+      //
+      List<Terminal> list = new TerminalService().findAll();
 
       for (Terminal terminal : list)
       {
          LOGGER.info(terminal.getTercod() + "," + terminal.getPtacod() + ", " + terminal.getTernom());
       }
+
+      Canal canal = new Canal();
+      canal.setCodigoCanal(6);
+      canal.setDescricaoCanal("teste");
+      canal.setTimCanal(123456);
+      new TerminalService().salvaCanal(canal);
    }
+
 }
