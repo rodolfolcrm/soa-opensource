@@ -1,6 +1,7 @@
 
 package br.com.rodolfomartins.imovel;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,11 @@ public class ImovelService
 
    public List<Imovel> findByName(String nome)
    {
+      if (nome == null || nome.trim().isEmpty())
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: nome");
+      }
+
       Map<String, String> map = new HashMap<String, String>();
       map.put("nome", nome);
       IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FIND_BY_NAME, conversor);
@@ -41,7 +47,53 @@ public class ImovelService
 
    public void salva(Imovel imovel)
    {
+      validaImovel(imovel);
       IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_SALVA, null);
       integrador.envia(OMElementHelper.toOM(imovel));
+   }
+
+   private void validaImovel(Imovel imovel)
+   {
+      if (imovel.getCpfProprietario() == null || imovel.getCpfProprietario() == 0)
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: cpfProprietario");
+      }
+
+      if (imovel.getCodigoIbgeEstado() == null || imovel.getCodigoIbgeEstado() == 0)
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: codigoIbgeEstado");
+      }
+
+      if (imovel.getEndereco() == null || imovel.getEndereco().isEmpty())
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: endereco");
+      }
+
+      if (imovel.getDescricao() == null || imovel.getDescricao().isEmpty())
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: descricao");
+      }
+
+      if (imovel.getValorAluguel() == null)
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: valorAluguel");
+      }
+
+      if (imovel.getCodigoIbgeMunicipio() == null || imovel.getCodigoIbgeMunicipio() == 0)
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: codigoIbgeMunicipio");
+      }
+   }
+
+   public static void main(String[] args)
+   {
+      Imovel imovel = new Imovel();
+      imovel.setCpfProprietario(12345678909L);
+      imovel.setCodigoIbgeEstado(12);
+      imovel.setEndereco("Rua A");
+      imovel.setDescricao("Apartamento muito bom");
+      imovel.setValorAluguel(new BigDecimal(1000));
+      imovel.setCodigoIbgeMunicipio(120001);
+      new ImovelService().salva(imovel);
    }
 }
