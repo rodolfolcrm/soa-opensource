@@ -11,7 +11,7 @@ import br.com.rodolfomartins.integrador.IntegradorWebServiceFactory;
 import br.com.rodolfomartins.util.OMElementHelper;
 
 /**
- * Descrição do Fonte
+ * Service para Imovel.
  * 
  * @author 15/09/2015: Rodolfo Martins <DD>
  */
@@ -26,12 +26,23 @@ public class ImovelService
 
    private Conversor<Imovel> conversor = new ConversorImovel();
 
+   /**
+    * Pesquisa todos os imoveis.
+    * 
+    * @return lista com todos os imoveis.
+    */
    public List<Imovel> findAll()
    {
       IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FINDALL, conversor);
       return conversor.converteLista(integrador.envia());
    }
 
+   /**
+    * Pesquisa Imovel por nome.
+    * 
+    * @param nome
+    * @return lista de imoveis por nome
+    */
    public List<Imovel> findByName(String nome)
    {
       if (nome == null || nome.trim().isEmpty())
@@ -45,6 +56,11 @@ public class ImovelService
       return conversor.converteLista(integrador.envia(map));
    }
 
+   /**
+    * Salva um imovel.
+    * 
+    * @param imovel
+    */
    public void salva(Imovel imovel)
    {
       validaImovel(imovel);
@@ -52,6 +68,11 @@ public class ImovelService
       integrador.envia(OMElementHelper.toOM(imovel));
    }
 
+   /**
+    * Valida um imovel para salvar.
+    * 
+    * @param imovel
+    */
    private void validaImovel(Imovel imovel)
    {
       if (imovel.getCpfProprietario() == null || imovel.getCpfProprietario() == 0)

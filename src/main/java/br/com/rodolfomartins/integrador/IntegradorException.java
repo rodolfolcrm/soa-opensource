@@ -1,12 +1,7 @@
-/*
- * Fóton Informática S.A.
- * Criação : 15/09/2015
- */
-
 package br.com.rodolfomartins.integrador;
 
 /**
- * Descrição do Fonte
+ * Exception do Integrador
  * 
  * @author 15/09/2015: Rodolfo Martins <DD>
  */

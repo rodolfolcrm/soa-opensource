@@ -1,7 +1,3 @@
-/*
- * Fóton Informática S.A.
- * Criação : 16/09/2015
- */
 
 package br.com.rodolfomartins.util;
 
@@ -14,13 +10,19 @@ import org.apache.axis2.databinding.utils.BeanUtil;
 import org.apache.axis2.util.StreamWrapper;
 
 /**
- * Descrição do Fonte
+ * Classe utilitária para {@link OMElement}
  * 
  * @author 16/09/2015: Rodolfo Martins <DD>
  */
 public class OMElementHelper
 {
 
+   /**
+    * Converte um objeto para um objeto {@link OMElement}
+    * 
+    * @param tipo
+    * @return {@link OMElement}
+    */
    public static OMElement toOM(Object tipo)
    {
       XMLStreamReader reader = BeanUtil.getPullParser(tipo);

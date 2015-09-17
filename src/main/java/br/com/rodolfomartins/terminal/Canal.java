@@ -1,8 +1,3 @@
-/*
- * Fóton Informática S.A.
- * Criação : 16/09/2015
- */
-
 package br.com.rodolfomartins.terminal;
 
 /**

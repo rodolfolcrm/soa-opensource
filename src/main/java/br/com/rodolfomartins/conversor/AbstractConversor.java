@@ -9,7 +9,7 @@ import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMNamespace;
 
 /**
- * Descrição do Fonte
+ * Classe abstrata para conversores entre OMElement e Pojos
  * 
  * @author 16/09/2015: Rodolfo Martins <DD>
  */
@@ -18,6 +18,11 @@ public abstract class AbstractConversor<TIPO> implements Conversor<TIPO>
 
    private OMNamespace omNamespace;
 
+   /**
+    * (Ver Javadoc da super classe)
+    * 
+    * @see br.com.rodolfomartins.conversor.Conversor#converteLista(org.apache.axiom.om.OMElement)
+    */
    public List<TIPO> converteLista(OMElement omElement)
    {
       List<TIPO> lista = new ArrayList<TIPO>();
@@ -35,16 +40,33 @@ public abstract class AbstractConversor<TIPO> implements Conversor<TIPO>
       return lista;
    }
 
+   /**
+    * Retorna o primeiro OMElement pelo nome
+    * 
+    * @param elemento
+    * @param nome
+    * @return OMElement
+    */
    protected OMElement obtemPrimeiroElementoComNome(OMElement elemento, String nome)
    {
       return elemento.getFirstChildWithName(new QName(getOmNamespace().getNamespaceURI(), nome));
    }
 
+   /**
+    * Retorna o OMNamespace
+    * 
+    * @return OMNamespace
+    */
    public OMNamespace getOmNamespace()
    {
       return omNamespace;
    }
 
+   /**
+    * (Ver Javadoc da super classe)
+    * 
+    * @see br.com.rodolfomartins.conversor.Conversor#setOmNamespace(org.apache.axiom.om.OMNamespace)
+    */
    public void setOmNamespace(OMNamespace omNamespace)
    {
       this.omNamespace = omNamespace;

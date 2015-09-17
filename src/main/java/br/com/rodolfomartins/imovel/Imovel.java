@@ -4,7 +4,7 @@ package br.com.rodolfomartins.imovel;
 import java.math.BigDecimal;
 
 /**
- * Descrição do Fonte
+ * Pojo para Imovel.
  * 
  * @author 15/09/2015: Rodolfo Martins <DD>
  */
