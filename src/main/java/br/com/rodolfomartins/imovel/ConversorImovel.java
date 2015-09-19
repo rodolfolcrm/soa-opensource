@@ -21,21 +21,21 @@ public class ConversorImovel extends AbstractConversor<Imovel>
    public Imovel converte(OMElement elemento)
    {
       OMElement identificador = obtemPrimeiroElementoComNome(elemento, "identificador");
-      OMElement cpfProprietario = obtemPrimeiroElementoComNome(elemento, "cpfProprietario");
-      OMElement codigoIbgeEstado = obtemPrimeiroElementoComNome(elemento, "codigoIbgeEstado");
+      OMElement cpfProprietario = obtemPrimeiroElementoComNome(elemento, "cpf_proprietario");
+      OMElement codigoIbgeEstado = obtemPrimeiroElementoComNome(elemento, "codigo_ibge_estado");
       OMElement endereco = obtemPrimeiroElementoComNome(elemento, "endereco");
       OMElement descricao = obtemPrimeiroElementoComNome(elemento, "descricao");
-      OMElement valorAluguel = obtemPrimeiroElementoComNome(elemento, "valorAluguel");
-      OMElement codigoIbgeMunicipio = obtemPrimeiroElementoComNome(elemento, "codigoIbgeMunicipio");
+      OMElement valorAluguel = obtemPrimeiroElementoComNome(elemento, "valor_aluguel");
+      OMElement codigoIbgeMunicipio = obtemPrimeiroElementoComNome(elemento, "codigo_ibge_municipio");
 
       Imovel imovel = new Imovel();
       imovel.setIdentificador(Long.valueOf(identificador.getText()));
-      imovel.setCpfProprietario(Long.valueOf(cpfProprietario.getText()));
-      imovel.setCodigoIbgeEstado(Integer.valueOf(codigoIbgeEstado.getText()));
+      imovel.setCpf_proprietario(Long.valueOf(cpfProprietario.getText()));
+      imovel.setCodigo_ibge_estado(Integer.valueOf(codigoIbgeEstado.getText()));
       imovel.setEndereco(endereco.getText());
       imovel.setDescricao(descricao.getText());
-      imovel.setValorAluguel(BigDecimal.ZERO);// TODO
-      imovel.setCodigoIbgeMunicipio(Integer.valueOf(codigoIbgeMunicipio.getText()));
+      imovel.setValor_aluguel(BigDecimal.ZERO);// TODO
+      imovel.setCodigo_ibge_municipio(Integer.valueOf(codigoIbgeMunicipio.getText()));
       return imovel;
    }
 }

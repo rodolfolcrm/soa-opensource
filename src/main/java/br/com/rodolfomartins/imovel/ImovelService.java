@@ -18,11 +18,12 @@ import br.com.rodolfomartins.util.OMElementHelper;
 public class ImovelService
 {
 
-   private static final String ENDPOINT = "http://localhost:9763/services/ImovelDataService?wsdl";
+   private static final String ENDPOINT = "http://localhost:9764/services/ImovelDataService?wsdl";
    private static final String NAMESPACE = "ImovelDataService";
+   // private static final String NAMESPACE = "http://ws.wso2.org/dataservice";
    private static final String NOMEMETODO_FINDALL = "findAll";
-   private static final String NOMEMETODO_FIND_BY_NAME = "findByName";
-   private static final String NOMEMETODO_SALVA = "salva";
+   private static final String NOMEMETODO_FIND_BY_DESCRICAO = "findByDescricao";
+   private static final String NOMEMETODO_SALVA = "addImovel";
 
    private Conversor<Imovel> conversor = new ConversorImovel();
 
@@ -43,16 +44,16 @@ public class ImovelService
     * @param nome
     * @return lista de imoveis por nome
     */
-   public List<Imovel> findByName(String nome)
+   public List<Imovel> findByDescricao(String descricao)
    {
-      if (nome == null || nome.trim().isEmpty())
+      if (descricao == null || descricao.trim().isEmpty())
       {
-         throw new RuntimeException("Campo Obrigatório não informado: nome");
+         throw new RuntimeException("Campo Obrigatório não informado: descricao");
       }
 
       Map<String, String> map = new HashMap<String, String>();
-      map.put("nome", nome);
-      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FIND_BY_NAME, conversor);
+      map.put("descricao", "%" + descricao + "%");
+      IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FIND_BY_DESCRICAO, conversor);
       return conversor.converteLista(integrador.envia(map));
    }
 
@@ -61,7 +62,7 @@ public class ImovelService
     * 
     * @param imovel
     */
-   public void salva(Imovel imovel)
+   public void inclui(Imovel imovel)
    {
       validaImovel(imovel);
       IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_SALVA, null);
@@ -75,12 +76,12 @@ public class ImovelService
     */
    private void validaImovel(Imovel imovel)
    {
-      if (imovel.getCpfProprietario() == null || imovel.getCpfProprietario() == 0)
+      if (imovel.getCpf_proprietario() == null || imovel.getCpf_proprietario() == 0)
       {
          throw new RuntimeException("Campo Obrigatório não informado: cpfProprietario");
       }
 
-      if (imovel.getCodigoIbgeEstado() == null || imovel.getCodigoIbgeEstado() == 0)
+      if (imovel.getCodigo_ibge_estado() == null || imovel.getCodigo_ibge_estado() == 0)
       {
          throw new RuntimeException("Campo Obrigatório não informado: codigoIbgeEstado");
       }
@@ -95,12 +96,12 @@ public class ImovelService
          throw new RuntimeException("Campo Obrigatório não informado: descricao");
       }
 
-      if (imovel.getValorAluguel() == null)
+      if (imovel.getValor_aluguel() == null)
       {
          throw new RuntimeException("Campo Obrigatório não informado: valorAluguel");
       }
 
-      if (imovel.getCodigoIbgeMunicipio() == null || imovel.getCodigoIbgeMunicipio() == 0)
+      if (imovel.getCodigo_ibge_municipio() == null || imovel.getCodigo_ibge_municipio() == 0)
       {
          throw new RuntimeException("Campo Obrigatório não informado: codigoIbgeMunicipio");
       }
@@ -109,12 +110,26 @@ public class ImovelService
    public static void main(String[] args)
    {
       Imovel imovel = new Imovel();
-      imovel.setCpfProprietario(12345678909L);
-      imovel.setCodigoIbgeEstado(12);
+      imovel.setIdentificador(4L);
+      imovel.setCpf_proprietario(12345678909L);
+      imovel.setCodigo_ibge_estado(12);
       imovel.setEndereco("Rua A");
       imovel.setDescricao("Apartamento muito bom");
-      imovel.setValorAluguel(new BigDecimal(1000));
-      imovel.setCodigoIbgeMunicipio(120001);
-      new ImovelService().salva(imovel);
+      imovel.setValor_aluguel(new BigDecimal(1000));
+      imovel.setCodigo_ibge_municipio(120001);
+      new ImovelService().inclui(imovel);
+
+      List<Imovel> imoveis = new ImovelService().findByDescricao("Casa");
+      if (imoveis != null && !imoveis.isEmpty())
+      {
+         for (Imovel im : imoveis)
+         {
+            System.out.println(im.getDescricao());
+         }
+      }
+      else
+      {
+         System.out.println("resultado vazio");
+      }
    }
 }

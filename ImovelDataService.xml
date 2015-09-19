@@ -1,12 +1,12 @@
 <data name="ImovelDataService" serviceNamespace="ImovelDataService" transports="http https local">
    <config id="imovelDS">
-      <property name="driverClassName">oracle.jdbc.driver.OracleDriver</property>
-      <property name="url">jdbc:oracle:thin:@172.25.0.15:1521:des01</property>
-      <property name="username">nbkdesftnusr</property>
-      <property name="password">nbkdesftnusr</property>
+      <property name="driverClassName">org.postgresql.Driver</property>
+      <property name="url">jdbc:postgresql://localhost:5432/postgres</property>
+      <property name="username">postgres</property>
+      <property name="password">postgres</property>
    </config>
    <query id="findAll" useConfig="imovelDS">
-      <sql>SELECT identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio FROM Imovel</sql>
+      <sql>SELECT identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio FROM "Imovel"</sql>
       <result element="Entries" rowName="Entry">
          <element column="identificador" name="identificador" xsdType="long"/>
          <element column="cpf_proprietario" name="cpf_proprietario" xsdType="long"/>
@@ -18,7 +18,7 @@
       </result>
    </query>
    <query id="findByDescricao" useConfig="imovelDS">
-      <sql>SELECT identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio FROM Imovel where descricao like :descricao</sql>
+      <sql>SELECT identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio FROM "Imovel" where descricao like :descricao</sql>
       <result element="Entries" rowName="Entry">
          <element column="identificador" name="identificador" xsdType="long"/>
          <element column="cpf_proprietario" name="cpf_proprietario" xsdType="long"/>
@@ -31,16 +31,14 @@
       <param name="descricao" ordinal="1" sqlType="STRING"/>
    </query>
    <query id="addImovelQuery" useConfig="imovelDS">
-      <sql>INSERT INTO Imovel(identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio) 
-            VALUES (:identificador, :cpf_proprietario, :codigo_ibge_estado, :endereco, :descricao, :valor_aluguel, :codigo_ibge_municipio)
-      </sql>
-      <param name="identificador" ordinal="1" paramType="SCALAR" sqlType="LONG" type="IN"/>
-      <param name="cpf_proprietario" ordinal="2" paramType="SCALAR" sqlType="LONG" type="IN"/>
-      <param name="codigo_ibge_estado" ordinal="3" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
-      <param name="endereco" ordinal="4" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="descricao" ordinal="5" paramType="SCALAR" sqlType="STRING" type="IN"/>
-      <param name="valor_aluguel" ordinal="6" paramType="SCALAR" sqlType="DECIMAL" type="IN"/>
-      <param name="codigo_ibge_municipio" ordinal="7" paramType="SCALAR" sqlType="INTEGER" type="IN"/>
+      <sql>INSERT INTO "Imovel"(identificador, cpf_proprietario, codigo_ibge_estado, endereco, descricao, valor_aluguel, codigo_ibge_municipio) &#13;            VALUES (:identificador, :cpf_proprietario, :codigo_ibge_estado, :endereco, :descricao, :valor_aluguel, :codigo_ibge_municipio)</sql>
+      <param name="identificador" sqlType="BIGINT"/>
+      <param name="cpf_proprietario" sqlType="BIGINT"/>
+      <param name="codigo_ibge_estado" sqlType="INTEGER"/>
+      <param name="endereco" sqlType="STRING"/>
+      <param name="descricao" sqlType="STRING"/>
+      <param name="valor_aluguel" sqlType="DOUBLE"/>
+      <param name="codigo_ibge_municipio" sqlType="INTEGER"/>
    </query>
    <operation name="findAll">
       <call-query href="findAll"/>
@@ -50,15 +48,15 @@
          <with-param name="descricao" query-param="descricao"/>
       </call-query>
    </operation>
-   <operation name="addCanal">
+   <operation name="addImovel">
       <call-query href="addImovelQuery">
-         <with-param name="codigoCanal" query-param="identificador"/>
-         <with-param name="cpfproprietario" query-param="cpf_proprietario"/>
-         <with-param name="codigoIbgeEstado" query-param="codigo_ibge_estado"/>
+         <with-param name="identificador" query-param="identificador"/>
+         <with-param name="cpf_proprietario" query-param="cpf_proprietario"/>
+         <with-param name="codigo_ibge_estado" query-param="codigo_ibge_estado"/>
          <with-param name="endereco" query-param="endereco"/>
          <with-param name="descricao" query-param="descricao"/>
-         <with-param name="valorAluguel" query-param="valor_aluguel"/>
-         <with-param name="codigoIbgeMunicipio" query-param="codigo_ibge_municipio"/>
+         <with-param name="valor_aluguel" query-param="valor_aluguel"/>
+         <with-param name="codigo_ibge_municipio" query-param="codigo_ibge_municipio"/>
       </call-query>
    </operation>
 </data>

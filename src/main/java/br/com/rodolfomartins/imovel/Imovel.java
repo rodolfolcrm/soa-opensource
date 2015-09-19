@@ -12,12 +12,12 @@ public class Imovel
 {
 
    private Long identificador;
-   private Long cpfProprietario;
-   private Integer codigoIbgeEstado;
+   private Long cpf_proprietario;
+   private Integer codigo_ibge_estado;
    private String endereco;
    private String descricao;
-   private BigDecimal valorAluguel;
-   private Integer codigoIbgeMunicipio;
+   private BigDecimal valor_aluguel;
+   private Integer codigo_ibge_municipio;
 
    public Long getIdentificador()
    {
@@ -29,24 +29,24 @@ public class Imovel
       this.identificador = identificador;
    }
 
-   public Long getCpfProprietario()
+   public Long getCpf_proprietario()
    {
-      return cpfProprietario;
+      return cpf_proprietario;
    }
 
-   public void setCpfProprietario(Long cpfProprietario)
+   public void setCpf_proprietario(Long cpf_proprietario)
    {
-      this.cpfProprietario = cpfProprietario;
+      this.cpf_proprietario = cpf_proprietario;
    }
 
-   public Integer getCodigoIbgeEstado()
+   public Integer getCodigo_ibge_estado()
    {
-      return codigoIbgeEstado;
+      return codigo_ibge_estado;
    }
 
-   public void setCodigoIbgeEstado(Integer codigoIbgeEstado)
+   public void setCodigo_ibge_estado(Integer codigo_ibge_estado)
    {
-      this.codigoIbgeEstado = codigoIbgeEstado;
+      this.codigo_ibge_estado = codigo_ibge_estado;
    }
 
    public String getEndereco()
@@ -69,24 +69,24 @@ public class Imovel
       this.descricao = descricao;
    }
 
-   public BigDecimal getValorAluguel()
+   public BigDecimal getValor_aluguel()
    {
-      return valorAluguel;
+      return valor_aluguel;
    }
 
-   public void setValorAluguel(BigDecimal valorAluguel)
+   public void setValor_aluguel(BigDecimal valor_aluguel)
    {
-      this.valorAluguel = valorAluguel;
+      this.valor_aluguel = valor_aluguel;
    }
 
-   public Integer getCodigoIbgeMunicipio()
+   public Integer getCodigo_ibge_municipio()
    {
-      return codigoIbgeMunicipio;
+      return codigo_ibge_municipio;
    }
 
-   public void setCodigoIbgeMunicipio(Integer codigoIbgeMunicipio)
+   public void setCodigo_ibge_municipio(Integer codigo_ibge_municipio)
    {
-      this.codigoIbgeMunicipio = codigoIbgeMunicipio;
+      this.codigo_ibge_municipio = codigo_ibge_municipio;
    }
 
 }
