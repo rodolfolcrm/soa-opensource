@@ -46,15 +46,21 @@ public class ImovelService
     */
    public List<Imovel> findByDescricao(String descricao)
    {
-      if (descricao == null || descricao.trim().isEmpty())
-      {
-         throw new RuntimeException("Campo Obrigatório não informado: descricao");
-      }
+      validaConsultaPorDescricao(descricao);
 
       Map<String, String> map = new HashMap<String, String>();
       map.put("descricao", "%" + descricao + "%");
       IntegradorWebService integrador = IntegradorWebServiceFactory.cria(ENDPOINT, NAMESPACE, NOMEMETODO_FIND_BY_DESCRICAO, conversor);
       return conversor.converteLista(integrador.envia(map));
+   }
+
+
+   private void validaConsultaPorDescricao(String descricao)
+   {
+      if (descricao == null || descricao.trim().isEmpty())
+      {
+         throw new RuntimeException("Campo Obrigatório não informado: descricao");
+      }
    }
 
    /**
