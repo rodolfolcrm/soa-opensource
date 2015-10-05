@@ -1,0 +1,127 @@
+-Conteúdo
+    -Contextualização; 
+    -Problema
+    -Objetivos
+    -Justificativa
+    -Metodologia
+    -Conclusão;
+
+-Contextualização
+    (Contextualize as informações para o entendimento da sua apresentação. 
+    Lembre-se que a banca já leu o seu trabalho, portanto não perca tempo trazendo informações de menor 
+    relevância nesta parte.)
+    
+    -SOA - Service Oriented Architectures, proposto em 1996 por Roy Schulte e Yefim Natis do Garter Group;  |Eles o apresentaram à partir da análise de experiências de diversos clientes que, na época, utilizavam a tecnologia cliente-servidor (em forte adoção naqueles anos), e que ganhou novamente atenção em virtude das novas possibilidades tecnológicas baseadas em padrões, da demanda crescente por soluções de integração e de relativo insucesso de outras alternativas.
+    -Definições
+        -Para o Gartner Group, SOA é uma abordagem arquitetural corporativa que permite a criação de serviços de negócio interoperáveis que podem facilmente ser reutilizados e compartilhados entre aplicações e empresas.
+        -Para a OASIS, SOA é um paradigma para organizar e utilizar capacidades distribuídas que podem estar sob o controle de diferentes domínios de propriedade. Provê uma maneira uniforme de oferecer, descobrir, interagir e utilizar capacidades para produzir efeitos desejados consistentes com pré-condições e expectativas mensuráveis.
+    -O que não é SOA:
+        -SOA não é uma tecnologia;                          |Há tanto de negócio quanto de tecnologia em SOA. As tecnologias (padrões) que dão suporte a SOA são o que a viabiliza, mas SOA não é uma tecnologia por si só.
+        -SOA não é uma metodologia;                         |Há várias metodologias (processos, ferramentas, métodos de trabalho) que podem ser usados para implantar SOA com sucesso;
+        -SOA não é algo que se possa comprar ou instalar;
+        -SOA não é um webservice;
+        -SOA não cria nada;                                                                             |Ela apenas sugere, propõe, define;
+    -O que é SOA:
+        -SOA pode ser considerada uma filosofia arquitetural;                                           |SOA é uma linha de pensamento que permeia a implementação de necessidades de negócio, refletida em diretrizes, políticas e metodologias corporativas, não necessariamente restritas à área de TI
+        -SOA baseia-se no conceito do uso de serviços atômicos, independentes e com baixo acoplamento;
+    -Benefícios de SOA
+        -Facilidade de Manutenção;                          |mudanças na lógica de negócios (implementação) não afetam aplicações existentes.
+        -Reuso;                                             |novas aplicações e processos (consumidores de serviços) podem reaproveitar mais facilmente as funcionalidades existentes.
+        -Flexibilidade;                                     |sistemas de back-end e infraestrutura podem ser substituídos com menor impacto.
+        -Resultado;                                         |agilidade e redução de custos;
+        -Qualidade;                                         |garantia de homogeneidade de processos;
+        -Menor tempo;                                       |agilidade na análise de impacto e no desenvolvimento evolutivo de seus sistemas;
+        -Menor custo;                                       |redução do custo de manutenção das aplicações;
+        -Controle;                                          |conhecimento dos ativos existentes;
+    -Motivadores de SOA;                                    |Simplificar projetos; Integração de aplicações; Reaproveitamento; Manutenção; Evolução;
+    
+-Problema
+    (Apresente o problema que foi objeto de sua pesquisa. 
+    “Problema” é a pergunta que a pesquisa se propôs a resolver.)
+    
+    -É possível criar arquitetura SOA utilizando ferramentas OpenSource?
+    
+-Objetivos
+    (Apresente os objetivos propostos para o seu trabalho. Se necessário, diferencie o objetivo geral 
+    dos objetivos específicos.)
+    
+    -Apresentar uma aquitetura SOA utilizando ferramentas OpenSource.
+        -Apresentar as ferramentas utilizadas e suas caracteriticas;
+        -Apresentar um estudo de caso;
+        -Criar Poc;        
+-Justificativa
+    (Exponha os motivos pelos quais sua pesquisa deve ser considerada, em termos 
+    de relevância científica, social, competitiva, etc)
+        
+    -Valor das ferramentas pagas;
+    -Quantidade e qualidade de ferramentas OpenSource;
+    -Documentação de ferramentas OpenSource;
+    -Comunidade ativa;
+    
+-Metodologia
+    (Apresente o caminho escolhido para se chegar ao fim proposto pela pesquisa. 
+    Quais escolhas você realizou para abordar o objeto de estudo e alcançar os resultados)
+    
+    -Referencial teórico;                       
+    -Componentes, padrões e características de uma arquitetura SOA;
+    -Ferramentas OpenSource para aplicar SOA;
+        WSO2
+            -Copiar figura com os componentes do WSO2
+        WSO2 Enterprise Service Bus
+            -Conectividade                                              |Suporta várias formas de transporte, protocolos, adaptadores para sistemas legados, adaptadores para serviços na nuvem. Transporte: HTTP, HTTPS, TCP, SFTP, ETC;Formatos e protocolos: JSON, XML, SOAP 1.1, SOAP 1.2;Adaptadores para sistemas legados: SAP BAPI & IDoc,
+            -Roteamento, mediação e transformação                       |Roteamento: Baseado no cabeçalho, baseado no conteúdo, baseado em regras e baseado em prioridade;Mediação: EIPs (filtros de mensagens, garantia de entrega, enriquecimento de mensagens, etc), integração com banco de dados, publicação de eventos, logging e auditoria, validação;Transformação: XSLT 1.0/2.0, XPath, XQuery, Smooks
+            -Mensagem, Serviços, API e segurança                        |Permite expor serviços e aplicações existentes através de diferentes protocolos e formatos de mensagens; Balanceamento de carga para escalabilidade e tratamento de falha provendo alta disponibilidade do negocio; Cria fachadas de serviços para legados e serviços não padronizados; Garante e gerencia segurança centralizada, incluindo autorização e autenticação.   
+            -Escalabilidade e estabilidade;
+            -Gerenciamento e monitoramento;
+        WSO2 Application Server                                         |Servidor de aplicação que provê tecnologias Open Source para Web Applications(Apache Tomcat), Web Services(Apache Axis2), serviços RESTful(JAX-RS).
+            -Web Applications(Apache Tomcat)
+            -Web Services(Apache Axis2)
+            -serviços RESTful(JAX-RS).
+        WSO2 Data Services Server                                       |Ferramenta que provê a integração de data store, criando data views, e hospedando data services. Permite data access e integração com processos de negocio, business intelligence e aplicações mobile. WSO2 Data Server suporta segurança e gerenciamento de acesso, transações, transformação de dados e validação usando lighweight.
+            -Integração data store
+            -Segurança
+            -Gerenciamento acesso
+            -Transações
+            -Transformações de dados
+            -Validação
+            -Hospeda Data Services        
+    -Estudo de caso;
+        -Adicionar o diagrama de caso de uso
+        -Adicionar a tabela com FURPS+        
+    -Apresentação da arquitetura criada, demonstrando seu uso através de uma POC;
+        -Adicionar o diagrama de implantação WSO2
+        -Adicionar o MER
+        -Apresentar o xml do ImovelDataService
+        -Apresentar a classe ImovelService
+        -Apresentar a publicação do Serviço no ESB;
+        -Apresentar o diagrama de sequência da solução        
+
+-Análise dos Resultados
+    (-Apresente, interprete e discuta os resultados obtidos com sua pesquisa. 
+    -Esta é a parte mais importante do trabalho, portanto a utilização de recursos visuais 
+    como diagramas, gráficos, tabelas, fotos, etc. pode ser interessante.)
+    
+    
+    -Para atender os requisitos R01, R02, R03 e R04 foram utilizadas as ferramentas WSO2 Data Services Server e WSO2 Enterprise Service Bus.
+    -Para atender os requisitos R05 e R06 foi utilizada a ferramenta WSO2 Web Services Application Server.
+    -Facilidade de manutenção, reuso, flexibilidade e gerenciabilidade foram atingidos.
+    -Utilização de ESB, Web Services, SOAP, UDDI, etc.
+    -Foram atingidas várias características de serviços SOA como: estilo arquitetural, princípios arquiteturais, padrões e critérios que atendem características como modularidade, encapsulamento, baixo acoplamento, separação de responsabilidades, reuso e composição.
+    -Princípios de design foram identificados como, baixo acoplamento, reusabilidade, autonomia, serviços sem estado, composição, interoperabilidade, entre outros.
+         -Copiar Diagrama princípios serviços
+    -Código Fonte:https://github.com/rodolfolcrm/soa-opensource.git
+        
+-Conclusão
+    (-Apresente de forma sucinta as conclusões alcançadas com o seu trabalho. 
+    -Destaque os resultados práticos da pesquisa para aqueles que podem vir a tomar contato com os 
+    seu trabalho.)
+
+    -Foi demonstrado que o objetivo do trabalho foi atingido;
+    -Simplicidade e produtividade;
+    -Projetos novos ou adoção gradativa;
+    -WSO2 vai além;
+    -Não foi o foco do trabalho fazer comparativo com ferramentas pagas;
+        
+-Referências
+    (-Faça constar na sua apresentação as referências utilizadas. Você não precisará apresentá-las, 
+    mas é importante que estejam presentes.)                    
